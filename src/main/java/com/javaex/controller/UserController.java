@@ -62,22 +62,22 @@ public class UserController {
 	// http://localhost:9000/api/users/login
 	// http://localhost:3000/loginform
 	/* 로그인 */
-	@PostMapping("/api/users/login")
-	public JsonResult login(@RequestBody UserVo userVo, HttpServletResponse response) {
-		System.out.println("UserController.login()");
-		System.out.println(userVo);
-		UserVo authUser = userService.exeLogin(userVo);	// id, password만 온다
-		
-		if(authUser != null ) { 	//로그인됨	
-			// 토큰을 만들고 "응답문서의 헤더"에 토큰을 붙여서 보낸다
-			JwtUtil.createTokenAndSetHeader(response, ""+authUser.getNo());
-			return JsonResult.success(authUser);	// no, name만 온다
-			
-		}else { 				//로그인 안됨
-			return JsonResult.fail("로그인 실패");	// no, name만 온다
-		}
-		
-	}
+//	@PostMapping("/api/users/login")
+//	public JsonResult login(@RequestBody UserVo userVo, HttpServletResponse response) {
+//		System.out.println("UserController.login()");
+//		System.out.println(userVo);
+//		UserVo authUser = userService.exeLogin(userVo);	// id, password만 온다
+//		
+//		if(authUser != null ) { 	//로그인됨	
+//			// 토큰을 만들고 "응답문서의 헤더"에 토큰을 붙여서 보낸다
+//			JwtUtil.createTokenAndSetHeader(response, ""+authUser.getNo());
+//			return JsonResult.success(authUser);	// no, name만 온다
+//			
+//		}else { 				//로그인 안됨
+//			return JsonResult.fail("로그인 실패");	// no, name만 온다
+//		}
+//		
+//	}
 	
 	
 	// -----------------------------------------------------------------------------
