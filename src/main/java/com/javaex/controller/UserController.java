@@ -22,17 +22,15 @@ public class UserController {
 	@Autowired		
 	private UserService userService;
 	
-	// http://localhost:9000/api/users
-	// http://localhost:3000/joinform
 	/* 회원가입 */
 	@PostMapping("/api/users")
-	public JsonResult join(@RequestBody UserVo userVo) {	
+	public JsonResult userJoin(@RequestBody UserVo userVo) {	
 		System.out.println("UserController.join()");
 		
-		int count = userService.exeJoinUser(userVo);
+		int count = userService.exeUserJoin(userVo);
 		
 		if(count != 1) { 		//등록안됨
-			return JsonResult.fail("등록에 실패했습니다.");
+			return JsonResult.fail("회원등록에 실패했습니다.");
 		}else { 				//등록됨
 			return JsonResult.success(count);
 		}
@@ -105,39 +103,39 @@ public class UserController {
 	}
 	
 	/* 회원정보수정 */
-	@PutMapping("/api/users/me")
-	public JsonResult modifyUser(HttpServletRequest request, @RequestBody UserVo userVo) {
-		System.out.println("UserController.modifyUser()");
-		
-		// 화면에 있는 userVo 출력
-		//System.out.println(userVo);	// password, name, gender
-		
-		// 토큰사용해서 no값 출력
-		int no = JwtUtil.getNoFromHeader(request);
-		
-		if(no != -1) {		// 토큰이 정상일때
-			// userVo에 no값도 넣어주기
-			userVo.setNo(no);
-			// System.out.println(userVo);
-			int count = userService.exeModifyUser(userVo);	// no, password, name, gender
-			// System.out.println(count);
-			
-			if(count == 1) {	// 정상적으로 수정되었을때
-				userVo.setPassword(null);	// 로그인할때 토큰에 이름이랑 no만 저장하기때매
-				userVo.setGender(null);		// 불필요한걸 지워서 저장시키기위해 두개만 보냄
-				return JsonResult.success(userVo);
-				
-			}else {			// 비정상적으로 수정되었을때
-				return JsonResult.fail("수정오류, 수정실패");
-				
-			}
-			
-		}else {		// 토큰이 비정상일때
-			return JsonResult.fail("토큰X, 비로그인, 변조");
-			
-		}
-	}
-	
+//	@PutMapping("/api/users/me")
+//	public JsonResult modifyUser(HttpServletRequest request, @RequestBody UserVo userVo) {
+//		System.out.println("UserController.modifyUser()");
+//		
+//		// 화면에 있는 userVo 출력
+//		//System.out.println(userVo);	// password, name, gender
+//		
+//		// 토큰사용해서 no값 출력
+//		int no = JwtUtil.getNoFromHeader(request);
+//		
+//		if(no != -1) {		// 토큰이 정상일때
+//			// userVo에 no값도 넣어주기
+//			userVo.setNo(no);
+//			// System.out.println(userVo);
+//			int count = userService.exeModifyUser(userVo);	// no, password, name, gender
+//			// System.out.println(count);
+//			
+//			if(count == 1) {	// 정상적으로 수정되었을때
+//				userVo.setPassword(null);	// 로그인할때 토큰에 이름이랑 no만 저장하기때매
+//				userVo.setGender(null);		// 불필요한걸 지워서 저장시키기위해 두개만 보냄
+//				return JsonResult.success(userVo);
+//				
+//			}else {			// 비정상적으로 수정되었을때
+//				return JsonResult.fail("수정오류, 수정실패");
+//				
+//			}
+//			
+//		}else {		// 토큰이 비정상일때
+//			return JsonResult.fail("토큰X, 비로그인, 변조");
+//			
+//		}
+//	}
+//	
 	
 	
 }

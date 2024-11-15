@@ -13,8 +13,8 @@ public class UserService {
 	private UserDao userDao;
 	
 	/* 회원가입 */
-	public int exeJoinUser(UserVo userVo) {	 
-		System.out.println("UserService.exeJoinUser()");
+	public int exeUserJoin(UserVo userVo) {	 
+		System.out.println("UserService.exeUserJoin()");
 		
 		int count = userDao.insertUser(userVo);
 		
