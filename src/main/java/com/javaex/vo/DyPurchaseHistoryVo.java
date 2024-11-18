@@ -8,6 +8,8 @@ public class DyPurchaseHistoryVo {
 	private int userNum;
 	private String purchasedDate;
 	private String purchasedStatus;
+    private int itemCost;  
+    private String itemBrandName; 
 	
 	
 	//생성자
@@ -66,11 +68,27 @@ public class DyPurchaseHistoryVo {
 		this.purchasedStatus = purchasedStatus;
 	}
 
+	public int getItemCost() {
+		return itemCost;
+	}
+
+	public void setItemCost(int itemCost) {
+		this.itemCost = itemCost;
+	}
+
+	public String getItemBrandName() {
+		return itemBrandName;
+	}
+
+	public void setItemBrandName(String itemBrandName) {
+		this.itemBrandName = itemBrandName;
+	}
 
 	@Override
 	public String toString() {
 		return "DyPurchaseHistoryVo [purchaseNum=" + purchaseNum + ", itemNum=" + itemNum + ", userNum=" + userNum
-				+ ", purchasedDate=" + purchasedDate + ", purchasedStatus=" + purchasedStatus + "]";
+				+ ", purchasedDate=" + purchasedDate + ", purchasedStatus=" + purchasedStatus + ", itemCost=" + itemCost
+				+ ", itemBrandName=" + itemBrandName + "]";
 	}
 
 

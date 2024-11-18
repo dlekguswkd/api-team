@@ -64,17 +64,22 @@
         ]]>
     </insert>
     
-    
-    
 
-
-	<!--히스토리 인서트-->
-	<insert id="insertHistory" parameterType="com.javaex.vo.unionVo">
-		<![CDATA[ 
-			INSERT INTO History (receiptNum, productDetailNum, productCount)
-			VALUES (#{receiptNum}, #{productDetailNum}, #{productCount})
-		]]>
+    <!-- 포인트 교환 기록 삽입 -->
+    <insert id="insertPurchaseHistory" parameterType="com.javaex.vo.DyPurchaseHistoryVo">
+    	<![CDATA[
+	        INSERT INTO purchaseHistory (itemNum, userNum, purchasedDate, purchasedStatus)
+	        VALUES (#{itemNum}, #{userNum}, #{purchasedDate}, #{purchasedStatus})
+        ]]>
+    </insert>
+    
+    <!-- 아이템 교환 포인트 내역 -->
+    <insert id="insertPointHistory2" parameterType="com.javaex.vo.DyPointHistoryVo">
+	    <![CDATA[
+	        INSERT INTO pointHistory (userNum, pointPurposeNum, historyDate, historyPoint, historyInfo)
+	        VALUES (#{userNum}, #{pointPurposeNum}, #{historyDate}, #{historyPoint}, #{historyInfo})
+	    ]]>
 	</insert>
-    
+
 
 </mapper>

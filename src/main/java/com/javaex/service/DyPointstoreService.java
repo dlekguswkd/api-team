@@ -10,6 +10,7 @@ import com.javaex.dao.DyPointstoreDao;
 import com.javaex.vo.DyCheckinVo;
 import com.javaex.vo.DyItemVo;
 import com.javaex.vo.DyPointHistoryVo;
+import com.javaex.vo.DyPurchaseHistoryVo;
 
 @Service
 public class DyPointstoreService {
@@ -71,17 +72,37 @@ public class DyPointstoreService {
 	
 	
 	/* 아이템 교환 */
-	public int exeItemExchange(DyPurchaseHistoryVo dyPurchaseHistoryVo) {
-		
+    public int exeItemExchange(DyPurchaseHistoryVo dyPurchaseHistoryVo) {
+    	System.out.println("DyPointstoreService.exeItemExchange()");
+    	
+        int count = dyPointstoreDao.insertPurchaseHistory(dyPurchaseHistoryVo);
+        
+        if (count > 0) {
+            // 아이템 브랜드에 따라 포인트 기록 삽입
+        	String pointPurpose = "4"; // 기본값은 4 (꾸미기가 아닌 경우)
 
-		// 4. 가져온 장바구니 목록을 이용하여 History 테이블에 인서트
-		for (unionVo item : cartItems) {
-			item.setReceiptNum(receiptNum); // 영수증 번호 설정
-			dao.insertHistory(item); // History 테이블에 삽입
-		}
+        	if ("꾸미기".equals(dyPurchaseHistoryVo.getItemBrandName())) {
+        	    pointPurpose = "5"; // "꾸미기"일 경우 5
+        	}
+            String historyInfo = "-"; // 교환 시 "-"로 처리
+            int historyPoint = dyPurchaseHistoryVo.getItemCost(); // 상품의 가격을 포인트로 사용
 
-		return deliveryInsertCount;
-	}
+            System.out.println("Item Brand Name: " + dyPurchaseHistoryVo.getItemBrandName()); 
+            
+            // 포인트 기록을 추가하는 insert 포인트 히스토리 메서드 호출
+            DyPointHistoryVo pointHistoryVo = new DyPointHistoryVo();
+            pointHistoryVo.setUserNum(dyPurchaseHistoryVo.getUserNum());
+            pointHistoryVo.setPointPurposeNum(Integer.parseInt(pointPurpose));
+            pointHistoryVo.setHistoryDate(LocalDate.now().toString());  // 현재 날짜
+            pointHistoryVo.setHistoryPoint(dyPurchaseHistoryVo.getItemCost());
+            pointHistoryVo.setHistoryInfo(historyInfo);
+
+            // 포인트 이력 삽입
+            dyPointstoreDao.insertPointHistory2(pointHistoryVo);
+        }
+
+        return count;
+    }
 	
 	
 }

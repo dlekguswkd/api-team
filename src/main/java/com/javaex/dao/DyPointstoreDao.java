@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.javaex.vo.DyCheckinVo;
 import com.javaex.vo.DyItemVo;
 import com.javaex.vo.DyPointHistoryVo;
+import com.javaex.vo.DyPurchaseHistoryVo;
 
 @Repository 
 public class DyPointstoreDao {
@@ -56,10 +57,19 @@ public class DyPointstoreDao {
     
 
 	/* 아이템 교환 */
-	public int insertHistory(unionVo historyVo) {
-		return session.insert("jmuser.insertHistory", historyVo);
-	}
+    public int insertPurchaseHistory(DyPurchaseHistoryVo dyPurchaseHistoryVo) {
+        System.out.println("DyPointstoreDao.insertPurchaseHistory()");
+        
+        return sqlSession.insert("dypointstore.insertPurchaseHistory", dyPurchaseHistoryVo);
+    }
 
+	/* 아이템 교환 포인트 내역 */
+    public int insertPointHistory2(DyPointHistoryVo dyPointHistoryVo) {
+        System.out.println("DyPointstoreDao.insertPointHistory()");
+
+        // MyBatis를 사용하여 SQL 쿼리 실행
+        return sqlSession.insert("dypointstore.insertPointHistory2", dyPointHistoryVo);
+    }
 
 	
 }

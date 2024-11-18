@@ -9,6 +9,7 @@ public class DyPointHistoryVo {
 	private String historyDate;
 	private int historyPoint;
 	private String historyInfo;
+	private int itemCost;
 	
 	
 	//생성자
@@ -76,12 +77,20 @@ public class DyPointHistoryVo {
 		this.historyInfo = historyInfo;
 	}
 
+	public int getItemCost() {
+		return itemCost;
+	}
 
+	public void setItemCost(int itemCost) {
+		this.itemCost = itemCost;
+	}
+
+	
 	@Override
 	public String toString() {
 		return "DyPointHistoryVo [historyNum=" + historyNum + ", userNum=" + userNum + ", pointPurposeNum="
 				+ pointPurposeNum + ", historyDate=" + historyDate + ", historyPoint=" + historyPoint + ", historyInfo="
-				+ historyInfo + "]";
+				+ historyInfo + ", itemCost=" + itemCost + "]";
 	}
 
 

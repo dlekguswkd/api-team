@@ -55,6 +55,21 @@ public class DyUserDao {
 		DyUserVo authUser = sqlSession.selectOne("dyuser.selectByEmailPw", dyUserVo);
 		return authUser;
 	}
+
 	
+	/* 헤더에 유저 포인트 */
+    public int getUserPoints(int userNum) {
+    	System.out.println("DyUserDao.getUserPoints()");
+        return sqlSession.selectOne("dyuser.getUserPoints", userNum);
+    }
 	
+    
+//    /* 헤더에 프로필사진 */
+//    public DyUserVo getUserProfile(int userNum) {
+//        System.out.println("DyUserDao.getUserProfile()");
+//        return sqlSession.selectOne("dyuser.getUserData", userNum); 
+//    }
+//	
+    
+    
 }

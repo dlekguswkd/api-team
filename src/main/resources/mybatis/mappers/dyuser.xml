@@ -45,5 +45,21 @@
 	</select>
 	
 	
+	<!-- 헤더에 유저 포인트 -->
+    <select id="getUserPoints" parameterType="int" resultType="int">
+        SELECT SUM(CASE WHEN historyInfo = '+' THEN historyPoint
+                        WHEN historyInfo = '-' THEN -historyPoint
+                        ELSE 0 END) 
+        FROM pointHistory
+        WHERE userNum = #{userNum}
+    </select>
+	
+	
+	<!-- 헤더에 프로필사진 -->
+<!--     <select id="getUserData" parameterType="int" resultType="DyUserVo">
+        SELECT userNum, userName, usingProfilePic
+        FROM users
+        WHERE userNum = #{userNum}
+    </select> -->
 
 </mapper>
