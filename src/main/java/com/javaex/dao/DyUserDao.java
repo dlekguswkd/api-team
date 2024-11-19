@@ -60,7 +60,9 @@ public class DyUserDao {
 	/* 헤더에 유저 포인트 */
     public int getUserPoints(int userNum) {
     	System.out.println("DyUserDao.getUserPoints()");
-        return sqlSession.selectOne("dyuser.getUserPoints", userNum);
+    	
+    	Integer  points = sqlSession.selectOne("dyuser.getUserPoints", userNum);
+        return (points != null) ? points : 0;
     }
 	
     

@@ -108,7 +108,7 @@ public class DyUserController {
 //        System.out.println("DyUserController.UserProfile()");
 //
 //        // 사용자의 프로필 정보 조회
-//        DyUserVo userProfile = dyUserService.getUserProfile(userNum);
+//        DyUserVo userProfile = dyUserService.getUserProfile(userNum);   
 //
 //        if (userProfile != null) {
 //            return JsonResult.success(userProfile);
