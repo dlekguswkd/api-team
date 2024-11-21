@@ -38,6 +38,21 @@ public class DyUserController {
 	}
 	
 	
+	/* 카카오 회원가입 */
+	@PostMapping("/api/kakao/users")
+	public JsonResult kakaoJoin(@RequestBody DyUserVo dyUserVo) {	
+		System.out.println("DyUserController.kakaoJoin()");
+		
+		int count = dyUserService.exeKakaoJoin(dyUserVo);
+		
+		if(count != 1) { 		//등록안됨
+			return JsonResult.fail("회원등록에 실패했습니다.");
+		}else { 				//등록됨
+			return JsonResult.success(count);
+		}
+		
+	}
+	
 
 	/* 이메일 중복체크 */
 	@PostMapping("/api/users/email/{userEmail}")

@@ -22,6 +22,17 @@ public class DyUserDao {
 		
 	}
 	
+	
+	/* 카카오 회원가입 */
+	public int insertKakao(DyUserVo dyUserVo) {
+		System.out.println("DyUserDao.insertKakao()");
+		
+		int count = sqlSession.insert("dyuser.kakaoinsert", dyUserVo);
+		
+		return count;
+		
+	}
+	
 	/* 이메일 중복체크 */
 	public int selectUserByEmail(String userEmail) {
 		System.out.println("DyUserDao.selectUserByEmail()");
@@ -65,6 +76,11 @@ public class DyUserDao {
         return (points != null) ? points : 0;
     }
 	
+    
+	/* 이메일로 회원 정보 조회 */
+    public DyUserVo selectUserByUserEmail(String userEmail) {
+        return sqlSession.selectOne("dyuser.selectUserByUserEmail", userEmail); 
+    }
     
 //    /* 헤더에 프로필사진 */
 //    public DyUserVo getUserProfile(int userNum) {

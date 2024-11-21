@@ -23,6 +23,17 @@ public class DyUserService {
 	}
 	
 	
+	/* 카카오 회원가입 */
+	public int exeKakaoJoin(DyUserVo dyUserVo) {	 
+		System.out.println("DyUserService.exeKakaoJoin()");
+		
+		int count = dyUserDao.insertKakao(dyUserVo);
+		
+		return count;
+		
+	}
+	
+	
 	/* 이메일 중복체크  */
 	public boolean exeEmailCheck(String userEmail) {
 		System.out.println("DyUserService.exeEmailCheck()");
@@ -66,6 +77,13 @@ public class DyUserService {
     public int getUserPoints(int userNum) {
     	System.out.println("DyUserService.getUserPoints()");
         return dyUserDao.getUserPoints(userNum);
+    }
+    
+    
+    
+	/* 이메일로 회원 정보 조회 */
+    public DyUserVo exeKakaoLogin(String userEmail) {
+        return dyUserDao.selectUserByUserEmail(userEmail); // 이메일로 사용자 조회
     }
     
     
