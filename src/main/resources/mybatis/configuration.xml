@@ -10,5 +10,6 @@
 		<mapper resource="mybatis/mappers/dyuser.xml" />
 		<mapper resource="mybatis/mappers/dypointstore.xml" />
 		<mapper resource="mybatis/mappers/mypage.xml" />
+		<mapper resource="mybatis/mappers/naveruser.xml" /> 
 	</mappers>
 </configuration>
